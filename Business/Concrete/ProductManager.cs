@@ -22,5 +22,10 @@ namespace Business.Concrete
             // Yetkisi var mı?
             return _productDal.GetAll();
         }
+
+        public List<Product> GetAllByCategoryId(int id)
+        {
+            return _productDal.GetAll(p => p.CategoryId == id);
+        }
     }
 }
