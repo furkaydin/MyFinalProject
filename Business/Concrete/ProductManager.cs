@@ -11,7 +11,7 @@ namespace Business.Concrete
     {
         IProductDal _productDal;
 
-        public ProductManager(IProductDal productDal)
+        public ProductManager(IProductDal productDal) // productDal bağımlı ama interface olarak bağımlı olduğu için ben dataaccess tarafında istediğim gibi at koşturabilirim. Veri tabanı değişikliği rahatca yapabilirim.
         {
             _productDal = productDal;
         }
