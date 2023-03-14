@@ -1,10 +1,10 @@
-﻿using Entities.Abstract;
+﻿using Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace DataAccess.Abstract
+namespace Core.DataAccess
 {
     // IEntity bir interface olduğu için newlenemez. Burada new(), ekleyerek sadece IEntityden implement edilmiş somut bir yapıyı kullanabilir.
     public interface IEntityRepository<T> where T:class, IEntity,new()  // hem referans tip olmasını istedik hemde IEntity implemente eden bir nesne olabilir. 
