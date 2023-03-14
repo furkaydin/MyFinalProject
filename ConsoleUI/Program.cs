@@ -11,7 +11,8 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            // ProductTest();
+            // Data Transformation Object
+             ProductTest();
             // CategoryTest();
         }
 
@@ -28,9 +29,9 @@ namespace ConsoleUI
         {
             ProductManager productManager = new ProductManager(new EFProductDal());
 
-            foreach (var product in productManager.GetAllByCategoryId(2))
+            foreach (var product in productManager.GetProductDetails())
             {
-                Console.WriteLine(product.ProductName);
+                Console.WriteLine(product.ProductName + "/" + product.CategoryName);
             }
         }
     }
