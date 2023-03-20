@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -17,11 +18,11 @@ namespace Business.Concrete
         {
             _productDal = productDal;
         }
-        public List<Product> GetAll()
+        public IDataResult<List<Product>> GetAll()
         {
             // İş kodları
             // Yetkisi var mı?
-            return _productDal.GetAll();
+            return new DataResult<List<Product>>(_productDal.GetAll(),true,"Ürünler listelendi.");
         }
 
         public List<Product> GetAllByCategoryId(int id)
@@ -46,8 +47,12 @@ namespace Business.Concrete
 
         public IResult Add(Product product)
         {
+            if(product.ProductName.Length<2)
+            {
+                return new ErrorResult(Messages.ProductNameInvalid);
+            }
             _productDal.Add(product);
-            return new Result(true,"Ürün eklendi.");
+            return new SuccessResult(Messages.ProductAdded); 
         }
     }
 }
