@@ -26,8 +26,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public List<Product> Get()
         {
-            IProductService productService = new ProductManager(new EFProductDal());
-            var result = productService.GetAll();
+            var result = _productService.GetAll();
             return result.Data;
         }
     }

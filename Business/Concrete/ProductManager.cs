@@ -47,6 +47,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(),Messages.DetailsListed);
         }
 
+       
         public IResult Add(Product product)
         {
             if(product.ProductName.Length<2)
