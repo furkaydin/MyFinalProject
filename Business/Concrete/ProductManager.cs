@@ -44,7 +44,7 @@ namespace Business.Concrete
 
         public IDataResult<List<ProductDetailDto>> GetProductDetails()
         {
-            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails());
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(),Messages.DetailsListed);
         }
 
         public IResult Add(Product product)
