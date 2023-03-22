@@ -20,7 +20,7 @@ namespace Business.Concrete
         }
         public IDataResult<List<Product>> GetAll()
         {
-            if(DateTime.Now.Hour==23)
+            if(DateTime.Now.Hour==15)
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
             }
@@ -56,6 +56,19 @@ namespace Business.Concrete
             }
             _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded); 
+        }
+
+        public IResult Update(Product product)
+        {
+            _productDal.Update(product);
+            return new SuccessResult("Güncellendi.");
+        }
+
+        public IResult Delete(Product product)
+        {
+            _productDal.Delete(product);
+            return new SuccessResult("Veri Silindi.");
+
         }
     }
 }

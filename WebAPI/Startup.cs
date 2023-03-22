@@ -32,8 +32,8 @@ namespace WebAPI
         {
 
             services.AddControllers();
-            services.AddSingleton<IProductService,ProductManager>(); // biri constructorda IProductService isterse ProductManager newle. Referansý constructora ver.
-            services.AddSingleton<IProductDal,EFProductDal>(); 
+            //services.AddSingleton<IProductService, ProductManager>(); // biri constructorda IProductService isterse ProductManager newle. Referansý constructora ver.
+            //services.AddSingleton<IProductDal, EFProductDal>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });

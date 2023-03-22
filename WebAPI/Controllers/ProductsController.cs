@@ -33,6 +33,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result.Message);
         }
+
         [HttpPost("add")]
         public IActionResult Add(Product product)
         {
@@ -41,11 +42,17 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-
         public IActionResult Get(int id)
         {
             var result = _productService.GetById(id);
             return result.Success ? Ok(result.Data) : BadRequest(result.Message);
+        }
+
+        [HttpPost("update")]
+        public IActionResult Update(Product product)
+        {
+            var result = _productService.Update(product);
+            return result.Success ? Ok(result) : BadRequest(result);
         }
     }
 }
