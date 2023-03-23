@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.CCS;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -17,10 +18,12 @@ namespace Business.Concrete
     public class ProductManager : IProductService
     {
         IProductDal _productDal;
+        ILogger _logger;
 
-        public ProductManager(IProductDal productDal) // productDal bağımlı ama interface olarak bağımlı olduğu için ben dataaccess tarafında istediğim gibi at koşturabilirim. Veri tabanı değişikliği rahatca yapabilirim.
+        public ProductManager(IProductDal productDal,ILogger logger) // productDal bağımlı ama interface olarak bağımlı olduğu için ben dataaccess tarafında istediğim gibi at koşturabilirim. Veri tabanı değişikliği rahatca yapabilirim.
         {
             _productDal = productDal;
+            _logger = logger;
         }
         public IDataResult<List<Product>> GetAll()
         {
@@ -52,14 +55,14 @@ namespace Business.Concrete
         }
 
        
-        [ValidationAspect(typeof(ProductValidator))]
+        [ValidationAspect(typeof(ProductValidator))] // attiributeler type ofla atanır.
         public IResult Add(Product product)
         {
-            //business code
-            // validation
-
-            _productDal.Add(product);
-            return new SuccessResult(Messages.ProductAdded); 
+            
+                //business code
+                _productDal.Add(product);
+                return new SuccessResult(Messages.ProductAdded); 
+           
         }
 
         public IResult Update(Product product)

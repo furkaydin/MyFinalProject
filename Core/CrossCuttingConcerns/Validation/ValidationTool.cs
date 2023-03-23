@@ -7,9 +7,9 @@ namespace Core.CrossCuttingConcerns.Validation
 {
     public static class ValidationTool  // static bir sınıfın metodlarıda static olmalıdır.
     {
-    public static void Validate(IValidator validator,object entity)
+    public static void Validate(IValidator validator,object entity) // Doğrulama kurallarının olduğu class , doğrulanacak class
         {
-            var context = new ValidationContext<object>(entity); // product validet edileceği seçiliyor.
+            var context = new ValidationContext<object>(entity); // product validate edileceği seçiliyor.
             var result = validator.Validate(context); // oluşturduğum nesneyi validate ederken contexti gönderiyorum içine.
             if (!result.IsValid)
             {
