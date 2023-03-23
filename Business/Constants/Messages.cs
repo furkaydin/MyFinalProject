@@ -11,5 +11,7 @@ namespace Business.Constants
         public static string MaintenanceTime = "Şuan listeleme zamanı değil.";
         public static string Listed = "Listelendi.";
         public static string DetailsListed = "Ürünlerin Detayları Listelendi.";
+        public static string ProductCount = "Kategorinin ürün sayısı 10'dan fazla olamaz..";
+        public static string SameProductName = "Aynı isimle birden fazla ürün olamaz.";
     }
 }

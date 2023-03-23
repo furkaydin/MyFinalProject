@@ -11,6 +11,7 @@ using Entities.DTOs;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -58,13 +59,38 @@ namespace Business.Concrete
         [ValidationAspect(typeof(ProductValidator))] // attiributeler type ofla atanır.
         public IResult Add(Product product)
         {
-            
-                //business code
+            if (CheckIfProductCountOfCategoryCorrect(product).Success)
+            {
+                if(CheckIfProductName(product).Success)
+                {
                 _productDal.Add(product);
-                return new SuccessResult(Messages.ProductAdded); 
-           
+                return new SuccessResult(Messages.ProductAdded);
+                }
+            }
+            return new ErrorResult();
         }
 
+        private IResult CheckIfProductCountOfCategoryCorrect(Product product)
+        {
+            var result = _productDal.GetAll(p => p.CategoryId == product.CategoryId).Count;
+            if (result >= 10)
+            {
+                return new ErrorResult(Messages.ProductCount);
+            }
+            return new SuccessResult();
+        }
+
+        private IResult CheckIfProductName(Product product)
+        {
+            var result = _productDal.GetAll(p => p.ProductName == product.ProductName).Any();  // Any=> Linqtir. Bool döndürür. İlgili sorgu içerisinde eleman varsa true döndürür.
+            if(result)
+            {
+                return new ErrorResult(Messages.SameProductName);
+            }
+            return new SuccessResult();
+        }
+
+        [ValidationAspect(typeof(ProductValidator))] // attiributeler type ofla atanır.
         public IResult Update(Product product)
         {
             _productDal.Update(product);
