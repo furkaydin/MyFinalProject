@@ -13,5 +13,6 @@ namespace Business.Constants
         public static string DetailsListed = "Ürünlerin Detayları Listelendi.";
         public static string ProductCount = "Kategorinin ürün sayısı 10'dan fazla olamaz..";
         public static string SameProductName = "Aynı isimle birden fazla ürün olamaz.";
+        public static string CategoryCount = "15'den fazla kategori var ise ürün ekleme olamaz.";
     }
 }

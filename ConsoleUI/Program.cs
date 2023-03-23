@@ -12,14 +12,14 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             // Data Transformation Object
-             ProductTest();
+             //ProductTest();
             // CategoryTest();
         }
 
         private static void CategoryTest()
         {
             CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
-            foreach (var category in categoryManager.GetAll())
+            foreach (var category in categoryManager.GetAll().Data)
             {
                 Console.WriteLine(category.CategoryName);
             }
@@ -27,20 +27,20 @@ namespace ConsoleUI
 
         private static void ProductTest()
         {
-            ProductManager productManager = new ProductManager(new EFProductDal());
-            var result = productManager.GetProductDetails();
-            if (result.Success==true)
-            {
-                foreach (var product in result.Data)
-                {
-                Console.WriteLine(product.ProductName + "/" + product.CategoryName);
-                }
-                Console.WriteLine(result.Message);
-            }
-            else
-            {
-                Console.WriteLine(result.Message);
-            }
+          ////  ProductManager productManager = new ProductManager(new EFProductDal(),new CategoryManager();
+          //  var result = productManager.GetProductDetails();
+          //  if (result.Success==true)
+          //  {
+          //      foreach (var product in result.Data)
+          //      {
+          //      Console.WriteLine(product.ProductName + "/" + product.CategoryName);
+          //      }
+          //      Console.WriteLine(result.Message);
+          //  }
+          //  else
+          //  {
+          //      Console.WriteLine(result.Message);
+          //  }
         }
     }
 }
