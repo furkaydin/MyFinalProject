@@ -58,7 +58,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(),Messages.DetailsListed);
         }
 
-       
+        
         [ValidationAspect(typeof(ProductValidator))] // attiributeler type ofla atanır.
         public IResult Add(Product product)
         {
