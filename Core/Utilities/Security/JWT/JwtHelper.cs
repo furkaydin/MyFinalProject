@@ -14,14 +14,13 @@ namespace Core.Utilities.Security.JWT
 {
     public class JwtHelper : ITokenHelper
     {
-        public IConfiguration Configuration { get; } // appsettings.jsondaki verileri okur.
-        private TokenOptions _tokenOptions; // okunulan değerleri tokenoptions içine atayacak.
+        public IConfiguration Configuration { get; }
+        private TokenOptions _tokenOptions;
         private DateTime _accessTokenExpiration;
         public JwtHelper(IConfiguration configuration)
         {
             Configuration = configuration;
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
-            // appsettings içindeki token options sectionu, token options modeliyle eşle.
 
         }
         public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)

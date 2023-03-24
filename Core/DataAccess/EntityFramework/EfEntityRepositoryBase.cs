@@ -8,18 +8,18 @@ using System.Text;
 
 namespace Core.DataAccess.EntityFramework
 {
-    public class EfEntityRepositoryBase<TEntity,TContext>:IEntityRepository<TEntity>
-        where TEntity : class, IEntity, new()
+    public class EfEntityRepositoryBase<TEntity,TContext>: IEntityRepository<TEntity>
+        where TEntity: class, IEntity, new()
         where TContext : DbContext,new()
     {
-        public void Add(TEntity entity)
+        public void Add(TEntity entity) 
         {
-            // using bağlantısı ile nesne ömrü yönetimi yapılır.(bellek yönetimini kontrol altına alır.)
+            //IDisposable pattern implementation of c#
             using (TContext context = new TContext())
             {
-                var addedEntity = context.Entry(entity); // ürünün referansını yakalar.
-                addedEntity.State = Microsoft.EntityFrameworkCore.EntityState.Added; // Nesnenin veritabanına ekleneceğini belirtir.
-                context.SaveChanges(); // kaydet
+                var addedEntity = context.Entry(entity);
+                addedEntity.State = EntityState.Added;
+                context.SaveChanges();
             }
         }
 
@@ -27,9 +27,9 @@ namespace Core.DataAccess.EntityFramework
         {
             using (TContext context = new TContext())
             {
-                var deletedEntity = context.Entry(entity); // referansı yakala
-                deletedEntity.State = Microsoft.EntityFrameworkCore.EntityState.Deleted; // durumu silme olarak set et.
-                context.SaveChanges(); // kaydet
+                var deletedEntity = context.Entry(entity);
+                deletedEntity.State = EntityState.Deleted;
+                context.SaveChanges();
             }
         }
 
@@ -55,9 +55,9 @@ namespace Core.DataAccess.EntityFramework
         {
             using (TContext context = new TContext())
             {
-                var uptadedEntity = context.Entry(entity); // referansı yakala
-                uptadedEntity.State = Microsoft.EntityFrameworkCore.EntityState.Modified; // durumu güncelleme olarak set et.
-                context.SaveChanges(); // kaydet
+                var updatedEntity = context.Entry(entity);
+                updatedEntity.State = EntityState.Modified;
+                context.SaveChanges();
             }
         }
     }

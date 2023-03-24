@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Business.CCS
 {
@@ -8,7 +6,8 @@ namespace Business.CCS
     {
         public void Log()
         {
-            Console.WriteLine("Veritabanına bağlandı.");
+            Console.WriteLine("Veritabanına loglandı");
         }
     }
+
 }

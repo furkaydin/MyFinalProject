@@ -12,10 +12,12 @@ using System.Threading.Tasks;
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]  // attribute
+    [ApiController]
     public class ProductsController : ControllerBase
     {
-        // Loosely coupled (Gevşek Bağımlılık)
+        //Loosely coupled
+        //naming convention
+        //IoC Container -- Inversion of Control
         IProductService _productService;
 
         public ProductsController(IProductService productService)
@@ -24,35 +26,45 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-        public IActionResult GetAll() // Http isteği döndürmek için customize edilen bir interface türü olan ActionResult. 
+        public IActionResult GetAll()
         {
-            var result = _productService.GetAll();
-            if(result.Success)
+            //Swagger
+            //Dependency chain --
+            var result =  _productService.GetAll();
+            if (result.Success)
             {
                 return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
+
+        }
+
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id)
+        {
+            var result = _productService.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
         }
 
         [HttpPost("add")]
         public IActionResult Add(Product product)
         {
             var result = _productService.Add(product);
-            return result.Success ? Ok(result) : BadRequest(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
-        [HttpGet("getbyid")]
-        public IActionResult Get(int id)
-        {
-            var result = _productService.GetById(id);
-            return result.Success ? Ok(result.Data) : BadRequest(result.Message);
-        }
 
-        [HttpPost("update")]
-        public IActionResult Update(Product product)
-        {
-            var result = _productService.Update(product);
-            return result.Success ? Ok(result) : BadRequest(result);
-        }
     }
 }
+
+
+//22.05 DERSTEYİZ
